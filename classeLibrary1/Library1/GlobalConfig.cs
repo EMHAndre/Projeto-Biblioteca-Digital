@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Library1.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+
 
 namespace Library1
 {
@@ -28,5 +31,9 @@ namespace Library1
             }
         }
 
+        public static string CnnString(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
     }
 }

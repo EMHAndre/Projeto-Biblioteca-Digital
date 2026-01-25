@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library1
+namespace Library1.Models
 {
     public class PrizeModel
     {
