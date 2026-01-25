@@ -1,6 +1,6 @@
 ﻿namespace TrackerUI
 {
-    partial class orLabel
+    partial class CreatePrizeForm : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -100,7 +100,7 @@
             prizeAmountValue.Name = "prizeAmountValue";
             prizeAmountValue.Size = new Size(276, 29);
             prizeAmountValue.TabIndex = 22;
-            prizeAmountValue.TextChanged += prizeAmountValue_TextChanged;
+           // prizeAmountValue.TextChanged += prizeAmountValue_TextChanged;
             // 
             // prizeAmountLabel
             // 
@@ -120,7 +120,7 @@
             prizePercentageValue.Name = "prizePercentageValue";
             prizePercentageValue.Size = new Size(276, 29);
             prizePercentageValue.TabIndex = 24;
-            prizePercentageValue.TextChanged += prizePercentageValue_TextChanged;
+            //prizePercentageValue.TextChanged += prizePercentageValue_TextChanged;
             // 
             // prizePercentageLabel
             // 
