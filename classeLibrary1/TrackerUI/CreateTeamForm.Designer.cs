@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            TeamNameValue = new TextBox();
+            teamNameValue = new TextBox();
             TeamNameLabel = new Label();
             headerLabel = new Label();
-            AddTeamMemberButton = new Button();
-            SelectTeamMemberDropDown = new ComboBox();
+            addTeamMemberButton = new Button();
+            selectTeamMemberDropDown = new ComboBox();
             SelectTeamMemberLabel = new Label();
             groupBox1 = new GroupBox();
-            FirstNameValue = new TextBox();
-            firstNameLabel = new Label();
-            lastNameValue = new TextBox();
-            lastNameLabel = new Label();
-            emailValue = new TextBox();
-            emailLabel = new Label();
+            createMemberBotton = new Button();
             cellphoneValue = new TextBox();
             cellphoneLabel = new Label();
-            createMemberBotton = new Button();
+            emailValue = new TextBox();
+            emailLabel = new Label();
+            lastNameValue = new TextBox();
+            lastNameLabel = new Label();
+            firstNameValue = new TextBox();
+            firstNameLabel = new Label();
             teamMembersListBox = new ListBox();
             deleteMemberPlayersButton = new Button();
             createTeamBotton = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // TeamNameValue
+            // teamNameValue
             // 
-            TeamNameValue.Location = new Point(23, 114);
-            TeamNameValue.Name = "TeamNameValue";
-            TeamNameValue.Size = new Size(371, 31);
-            TeamNameValue.TabIndex = 17;
-            TeamNameValue.TextChanged += TeamNameValue_TextChanged;
+            teamNameValue.Location = new Point(23, 114);
+            teamNameValue.Name = "teamNameValue";
+            teamNameValue.Size = new Size(371, 31);
+            teamNameValue.TabIndex = 17;
+            teamNameValue.TextChanged += TeamNameValue_TextChanged;
             // 
             // TeamNameLabel
             // 
@@ -81,29 +81,30 @@
             headerLabel.TabIndex = 15;
             headerLabel.Text = "Create Team";
             // 
-            // AddTeamMemberButton
+            // addTeamMemberButton
             // 
-            AddTeamMemberButton.FlatAppearance.BorderColor = Color.Silver;
-            AddTeamMemberButton.FlatAppearance.MouseDownBackColor = Color.Silver;
-            AddTeamMemberButton.FlatAppearance.MouseOverBackColor = Color.White;
-            AddTeamMemberButton.FlatStyle = FlatStyle.Flat;
-            AddTeamMemberButton.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AddTeamMemberButton.ForeColor = Color.DeepSkyBlue;
-            AddTeamMemberButton.Location = new Point(59, 249);
-            AddTeamMemberButton.Name = "AddTeamMemberButton";
-            AddTeamMemberButton.Size = new Size(197, 54);
-            AddTeamMemberButton.TabIndex = 23;
-            AddTeamMemberButton.Text = "Add Member";
-            AddTeamMemberButton.UseVisualStyleBackColor = true;
+            addTeamMemberButton.FlatAppearance.BorderColor = Color.Silver;
+            addTeamMemberButton.FlatAppearance.MouseDownBackColor = Color.Silver;
+            addTeamMemberButton.FlatAppearance.MouseOverBackColor = Color.White;
+            addTeamMemberButton.FlatStyle = FlatStyle.Flat;
+            addTeamMemberButton.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addTeamMemberButton.ForeColor = Color.DeepSkyBlue;
+            addTeamMemberButton.Location = new Point(59, 249);
+            addTeamMemberButton.Name = "addTeamMemberButton";
+            addTeamMemberButton.Size = new Size(197, 54);
+            addTeamMemberButton.TabIndex = 23;
+            addTeamMemberButton.Text = "Add Member";
+            addTeamMemberButton.UseVisualStyleBackColor = true;
+            addTeamMemberButton.Click += addTeamMemberButton_Click;
             // 
-            // SelectTeamMemberDropDown
+            // selectTeamMemberDropDown
             // 
-            SelectTeamMemberDropDown.FormattingEnabled = true;
-            SelectTeamMemberDropDown.Location = new Point(23, 210);
-            SelectTeamMemberDropDown.Name = "SelectTeamMemberDropDown";
-            SelectTeamMemberDropDown.Size = new Size(324, 33);
-            SelectTeamMemberDropDown.TabIndex = 22;
-            SelectTeamMemberDropDown.SelectedIndexChanged += SelectTeamMemberDropDown_SelectedIndexChanged;
+            selectTeamMemberDropDown.FormattingEnabled = true;
+            selectTeamMemberDropDown.Location = new Point(23, 210);
+            selectTeamMemberDropDown.Name = "selectTeamMemberDropDown";
+            selectTeamMemberDropDown.Size = new Size(324, 33);
+            selectTeamMemberDropDown.TabIndex = 22;
+            selectTeamMemberDropDown.SelectedIndexChanged += SelectTeamMemberDropDown_SelectedIndexChanged;
             // 
             // SelectTeamMemberLabel
             // 
@@ -125,7 +126,7 @@
             groupBox1.Controls.Add(emailLabel);
             groupBox1.Controls.Add(lastNameValue);
             groupBox1.Controls.Add(lastNameLabel);
-            groupBox1.Controls.Add(FirstNameValue);
+            groupBox1.Controls.Add(firstNameValue);
             groupBox1.Controls.Add(firstNameLabel);
             groupBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = SystemColors.MenuHighlight;
@@ -136,65 +137,21 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Add New Member";
             // 
-            // FirstNameValue
+            // createMemberBotton
             // 
-            FirstNameValue.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FirstNameValue.Location = new Point(174, 44);
-            FirstNameValue.Name = "FirstNameValue";
-            FirstNameValue.Size = new Size(237, 29);
-            FirstNameValue.TabIndex = 10;
-            FirstNameValue.TextChanged += FirstNameValue_TextChanged;
-            // 
-            // firstNameLabel
-            // 
-            firstNameLabel.AutoSize = true;
-            firstNameLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            firstNameLabel.ForeColor = Color.DeepSkyBlue;
-            firstNameLabel.Location = new Point(13, 45);
-            firstNameLabel.Name = "firstNameLabel";
-            firstNameLabel.Size = new Size(151, 38);
-            firstNameLabel.TabIndex = 9;
-            firstNameLabel.Text = "Frist Name";
-            // 
-            // lastNameValue
-            // 
-            lastNameValue.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lastNameValue.Location = new Point(174, 87);
-            lastNameValue.Name = "lastNameValue";
-            lastNameValue.Size = new Size(237, 29);
-            lastNameValue.TabIndex = 12;
-            lastNameValue.TextChanged += lastNameValue_TextChanged;
-            // 
-            // lastNameLabel
-            // 
-            lastNameLabel.AutoSize = true;
-            lastNameLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lastNameLabel.ForeColor = Color.DeepSkyBlue;
-            lastNameLabel.Location = new Point(17, 83);
-            lastNameLabel.Name = "lastNameLabel";
-            lastNameLabel.Size = new Size(147, 38);
-            lastNameLabel.TabIndex = 11;
-            lastNameLabel.Text = "Last Name";
-            // 
-            // emailValue
-            // 
-            emailValue.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            emailValue.Location = new Point(174, 125);
-            emailValue.Name = "emailValue";
-            emailValue.Size = new Size(237, 29);
-            emailValue.TabIndex = 14;
-            emailValue.TextChanged += emailValue_TextChanged;
-            // 
-            // emailLabel
-            // 
-            emailLabel.AutoSize = true;
-            emailLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            emailLabel.ForeColor = Color.DeepSkyBlue;
-            emailLabel.Location = new Point(17, 121);
-            emailLabel.Name = "emailLabel";
-            emailLabel.Size = new Size(83, 38);
-            emailLabel.TabIndex = 13;
-            emailLabel.Text = "Email";
+            createMemberBotton.FlatAppearance.BorderColor = Color.Silver;
+            createMemberBotton.FlatAppearance.MouseDownBackColor = Color.Silver;
+            createMemberBotton.FlatAppearance.MouseOverBackColor = Color.White;
+            createMemberBotton.FlatStyle = FlatStyle.Flat;
+            createMemberBotton.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            createMemberBotton.ForeColor = Color.DeepSkyBlue;
+            createMemberBotton.Location = new Point(143, 200);
+            createMemberBotton.Name = "createMemberBotton";
+            createMemberBotton.Size = new Size(197, 54);
+            createMemberBotton.TabIndex = 25;
+            createMemberBotton.Text = "Create Member";
+            createMemberBotton.UseVisualStyleBackColor = true;
+            createMemberBotton.Click += createMemberBotton_Click;
             // 
             // cellphoneValue
             // 
@@ -216,21 +173,65 @@
             cellphoneLabel.TabIndex = 15;
             cellphoneLabel.Text = "Cellphone";
             // 
-            // createMemberBotton
+            // emailValue
             // 
-            createMemberBotton.FlatAppearance.BorderColor = Color.Silver;
-            createMemberBotton.FlatAppearance.MouseDownBackColor = Color.Silver;
-            createMemberBotton.FlatAppearance.MouseOverBackColor = Color.White;
-            createMemberBotton.FlatStyle = FlatStyle.Flat;
-            createMemberBotton.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            createMemberBotton.ForeColor = Color.DeepSkyBlue;
-            createMemberBotton.Location = new Point(143, 200);
-            createMemberBotton.Name = "createMemberBotton";
-            createMemberBotton.Size = new Size(197, 54);
-            createMemberBotton.TabIndex = 25;
-            createMemberBotton.Text = "Create Member";
-            createMemberBotton.UseVisualStyleBackColor = true;
-            createMemberBotton.Click += createMemberBotton_Click;
+            emailValue.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            emailValue.Location = new Point(174, 125);
+            emailValue.Name = "emailValue";
+            emailValue.Size = new Size(237, 29);
+            emailValue.TabIndex = 14;
+            emailValue.TextChanged += emailValue_TextChanged;
+            // 
+            // emailLabel
+            // 
+            emailLabel.AutoSize = true;
+            emailLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            emailLabel.ForeColor = Color.DeepSkyBlue;
+            emailLabel.Location = new Point(17, 121);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new Size(83, 38);
+            emailLabel.TabIndex = 13;
+            emailLabel.Text = "Email";
+            // 
+            // lastNameValue
+            // 
+            lastNameValue.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lastNameValue.Location = new Point(174, 87);
+            lastNameValue.Name = "lastNameValue";
+            lastNameValue.Size = new Size(237, 29);
+            lastNameValue.TabIndex = 12;
+            lastNameValue.TextChanged += lastNameValue_TextChanged;
+            // 
+            // lastNameLabel
+            // 
+            lastNameLabel.AutoSize = true;
+            lastNameLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lastNameLabel.ForeColor = Color.DeepSkyBlue;
+            lastNameLabel.Location = new Point(17, 83);
+            lastNameLabel.Name = "lastNameLabel";
+            lastNameLabel.Size = new Size(147, 38);
+            lastNameLabel.TabIndex = 11;
+            lastNameLabel.Text = "Last Name";
+            // 
+            // firstNameValue
+            // 
+            firstNameValue.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            firstNameValue.Location = new Point(174, 44);
+            firstNameValue.Name = "firstNameValue";
+            firstNameValue.Size = new Size(237, 29);
+            firstNameValue.TabIndex = 10;
+            firstNameValue.TextChanged += FirstNameValue_TextChanged;
+            // 
+            // firstNameLabel
+            // 
+            firstNameLabel.AutoSize = true;
+            firstNameLabel.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            firstNameLabel.ForeColor = Color.DeepSkyBlue;
+            firstNameLabel.Location = new Point(13, 45);
+            firstNameLabel.Name = "firstNameLabel";
+            firstNameLabel.Size = new Size(151, 38);
+            firstNameLabel.TabIndex = 9;
+            firstNameLabel.Text = "Frist Name";
             // 
             // teamMembersListBox
             // 
@@ -253,10 +254,11 @@
             deleteMemberPlayersButton.ForeColor = Color.DeepSkyBlue;
             deleteMemberPlayersButton.Location = new Point(898, 313);
             deleteMemberPlayersButton.Name = "deleteMemberPlayersButton";
-            deleteMemberPlayersButton.Size = new Size(135, 90);
+            deleteMemberPlayersButton.Size = new Size(148, 90);
             deleteMemberPlayersButton.TabIndex = 27;
-            deleteMemberPlayersButton.Text = "Delete Member";
+            deleteMemberPlayersButton.Text = "Delete Selected";
             deleteMemberPlayersButton.UseVisualStyleBackColor = true;
+            deleteMemberPlayersButton.Click += deleteMemberPlayersButton_Click;
             // 
             // createTeamBotton
             // 
@@ -279,15 +281,15 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1045, 695);
+            ClientSize = new Size(1102, 695);
             Controls.Add(createTeamBotton);
             Controls.Add(deleteMemberPlayersButton);
             Controls.Add(teamMembersListBox);
             Controls.Add(groupBox1);
-            Controls.Add(AddTeamMemberButton);
-            Controls.Add(SelectTeamMemberDropDown);
+            Controls.Add(addTeamMemberButton);
+            Controls.Add(selectTeamMemberDropDown);
             Controls.Add(SelectTeamMemberLabel);
-            Controls.Add(TeamNameValue);
+            Controls.Add(teamNameValue);
             Controls.Add(TeamNameLabel);
             Controls.Add(headerLabel);
             Name = "CreateTeamForm";
@@ -301,14 +303,14 @@
 
         #endregion
 
-        private TextBox TeamNameValue;
+        private TextBox teamNameValue;
         private Label TeamNameLabel;
         private Label headerLabel;
-        private Button AddTeamMemberButton;
-        private ComboBox SelectTeamMemberDropDown;
+        private Button addTeamMemberButton;
+        private ComboBox selectTeamMemberDropDown;
         private Label SelectTeamMemberLabel;
         private GroupBox groupBox1;
-        private TextBox FirstNameValue;
+        private TextBox firstNameValue;
         private Label firstNameLabel;
         private TextBox lastNameValue;
         private Label lastNameLabel;

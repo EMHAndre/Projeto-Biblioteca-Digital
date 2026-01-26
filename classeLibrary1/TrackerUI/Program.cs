@@ -20,7 +20,7 @@ namespace TrackerUI
             GlobalConfig.InitializeConnections(database: true, textFiles: true);
             //Application.Run(new CreatePrizeForm());
             ApplicationConfiguration.Initialize();
-            Application.Run(new CreatePrizeForm());
+            Application.Run(new CreateTournamentForm());
         }
     }
 }

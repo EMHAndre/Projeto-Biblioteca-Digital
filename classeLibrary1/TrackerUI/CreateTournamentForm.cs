@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Library1;
+using Library1.DataAccess;
+using Library1.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,33 @@ namespace TrackerUI
 {
     public partial class CreateTournamentForm : Form
     {
+        private List<TeamModel> availableTeams = new List<TeamModel>();
+        private List<TeamModel> selectedTeams = new List<TeamModel>();
+        private List<PrizeModel> selectedPrizes = new List<PrizeModel>();
         public CreateTournamentForm()
         {
             InitializeComponent();
+        }
+
+        private void CreateTournamentForm_Load(object sender, EventArgs e)
+        {
+            availableTeams = GlobalConfig.Connections[0].GetTeam_All();
+            WireUpLists();
+        }
+
+        private void WireUpLists()
+        {
+            selectTeamDropDown.DataSource = null;
+            selectTeamDropDown.DataSource = availableTeams;
+            selectTeamDropDown.DisplayMember = "TeamName";
+
+            tournamentTeamsListBox.DataSource = null;
+            tournamentTeamsListBox.DataSource = selectedTeams;
+            tournamentTeamsListBox.DisplayMember = "TeamName";
+
+            prizesListBox.DataSource = null;
+            prizesListBox.DataSource = selectedPrizes;
+            prizesListBox.DisplayMember = "PlaceName";
         }
 
         private void TournamentValue_TextChanged(object sender, EventArgs e)
@@ -64,7 +91,20 @@ namespace TrackerUI
 
         private void CreateTournamentBotton_Click(object sender, EventArgs e)
         {
+              TournamentModel t = new TournamentModel
+              {
+                  TournamentName = tournamentNameValue.Text,
+                  EntryFee = decimal.Parse(entryFeeValue.Text),
+                  EnteredTeams = selectedTeams,
+                  Prizes = selectedPrizes
+              };
 
+              foreach (IDataConnection db in GlobalConfig.Connections)
+              {
+                  db.CreateTournament(t);
+              }
+
+            MessageBox.Show("Tournament created successfully!");
         }
     }
 }

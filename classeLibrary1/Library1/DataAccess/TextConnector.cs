@@ -19,12 +19,14 @@ namespace Library1.DataAccess
 
         public PersonModel CreatePerson(PersonModel model)
         {
-            throw new System.NotImplementedException();
+            model.Id = 1; // temporário
+            return model;
         }
 
         public TeamModel CreateTeam(TeamModel model)
         {
-            throw new System.NotImplementedException();
+            model.Id = 1; // temporário
+            return model;
         }
 
         public TournamentModel CreateTournament(TournamentModel model)
@@ -37,6 +39,10 @@ namespace Library1.DataAccess
             throw new System.NotImplementedException();
         }
 
+        void IDataConnection.CreateTeam(TeamModel t)
+        {
+            return;
+        }
     }
     
 }
