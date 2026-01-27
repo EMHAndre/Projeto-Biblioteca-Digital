@@ -15,6 +15,7 @@ namespace Library1.DataAccess
         void CreateTeam(TeamModel t);
         List<TeamModel> GetTeam_All();
         void CreateTournament(TournamentModel t);
+        void UpdateMatchup(MatchupModel m);
     }
 
 }

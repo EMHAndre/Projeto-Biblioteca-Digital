@@ -11,5 +11,6 @@ namespace Library1.Models
         public List<MatchupEntryModel> Entries { get; set; } = new List<MatchupEntryModel>();
         public TeamModel Winner { get; set; }
         public int MatchupRound { get; set; }
+        public object Id { get; internal set; }
     }
 }

@@ -43,6 +43,7 @@ namespace TrackerUI
             teamMembersListBox.DataSource = null;
             teamMembersListBox.DataSource = selectedTeamMembers;
             teamMembersListBox.DisplayMember = "FullName";
+
         }
 
 

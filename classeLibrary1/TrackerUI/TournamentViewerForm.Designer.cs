@@ -37,8 +37,8 @@ namespace TrackerUI
             matchupListBox = new ListBox();
             teamOneName = new Label();
             teamOneScoreLabel = new Label();
-            TeamOneScoreValue = new TextBox();
-            TeamTwoScoreText = new TextBox();
+            teamOneScoreValue = new TextBox();
+            teamTwoScoreValue = new TextBox();
             TeamTwoScoreLabel = new Label();
             teamTwoName = new Label();
             versusLabel = new Label();
@@ -85,7 +85,7 @@ namespace TrackerUI
             roundDropDown.Name = "roundDropDown";
             roundDropDown.Size = new Size(338, 40);
             roundDropDown.TabIndex = 3;
-            roundDropDown.SelectedIndexChanged += this.roundDropDown_SelectedIndexChanged;
+            roundDropDown.SelectedIndexChanged += roundDropDown_SelectedIndexChanged;
             // 
             // UnplayedOnlyCheckBox
             // 
@@ -110,7 +110,7 @@ namespace TrackerUI
             matchupListBox.Name = "matchupListBox";
             matchupListBox.Size = new Size(456, 258);
             matchupListBox.TabIndex = 5;
-            matchupListBox.SelectedIndexChanged += this.matchupListBox_SelectedIndexChanged;
+            matchupListBox.SelectedIndexChanged += matchupListBox_SelectedIndexChanged;
             // 
             // teamOneName
             // 
@@ -134,19 +134,20 @@ namespace TrackerUI
             teamOneScoreLabel.TabIndex = 7;
             teamOneScoreLabel.Text = "<Score>";
             // 
-            // TeamOneScoreValue
+            // teamOneScoreValue
             // 
-            TeamOneScoreValue.Location = new Point(714, 316);
-            TeamOneScoreValue.Name = "TeamOneScoreValue";
-            TeamOneScoreValue.Size = new Size(150, 39);
-            TeamOneScoreValue.TabIndex = 8;
+            teamOneScoreValue.Location = new Point(714, 316);
+            teamOneScoreValue.Name = "teamOneScoreValue";
+            teamOneScoreValue.Size = new Size(150, 39);
+            teamOneScoreValue.TabIndex = 8;
             // 
-            // TeamTwoScoreText
+            // teamTwoScoreValue
             // 
-            TeamTwoScoreText.Location = new Point(749, 473);
-            TeamTwoScoreText.Name = "TeamTwoScoreText";
-            TeamTwoScoreText.Size = new Size(150, 39);
-            TeamTwoScoreText.TabIndex = 11;
+            teamTwoScoreValue.Location = new Point(749, 473);
+            teamTwoScoreValue.Name = "teamTwoScoreValue";
+            teamTwoScoreValue.Size = new Size(150, 39);
+            teamTwoScoreValue.TabIndex = 11;
+            teamTwoScoreValue.TextChanged += teamTwoScoreText_TextChanged;
             // 
             // TeamTwoScoreLabel
             // 
@@ -204,10 +205,10 @@ namespace TrackerUI
             ClientSize = new Size(1040, 576);
             Controls.Add(scoreButton);
             Controls.Add(versusLabel);
-            Controls.Add(TeamTwoScoreText);
+            Controls.Add(teamTwoScoreValue);
             Controls.Add(TeamTwoScoreLabel);
             Controls.Add(teamTwoName);
-            Controls.Add(TeamOneScoreValue);
+            Controls.Add(teamOneScoreValue);
             Controls.Add(teamOneScoreLabel);
             Controls.Add(teamOneName);
             Controls.Add(matchupListBox);
@@ -223,14 +224,7 @@ namespace TrackerUI
             ResumeLayout(false);
             PerformLayout();
         }
-        private void roundDropDown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // código quando o round mudar
-        }
-        private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // código quando o usuário selecionar um matchup
-        }
+        
 
 
         private void TournamentViewerForm_Load(object sender, EventArgs e)
@@ -253,8 +247,8 @@ namespace TrackerUI
         private ListBox matchupListBox;
         private Label teamOneName;
         private Label teamOneScoreLabel;
-        private TextBox TeamOneScoreValue;
-        private TextBox TeamTwoScoreText;
+        private TextBox teamOneScoreValue;
+        private TextBox teamTwoScoreValue;
         private Label TeamTwoScoreLabel;
         private Label teamTwoName;
         private Label versusLabel;

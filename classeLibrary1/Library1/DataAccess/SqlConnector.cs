@@ -1,10 +1,11 @@
-﻿using Library1.Models;
+﻿using Dapper;
+using Library1.Models;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -182,8 +183,103 @@ namespace Library1.DataAccess
 
         public List<TeamModel> GetTeam_All()
         {
-            return new List<TeamModel>();
+            List<TeamModel> output = new List<TeamModel>();
+
+            using (SqlConnection connection =
+                new SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                SqlCommand cmd = new SqlCommand("dbo.spTeams_GetAll", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        TeamModel team = new TeamModel
+                        {
+                            Id = reader.GetInt32(0),
+                            TeamName = reader.GetString(1)
+                        };
+
+                        team.TeamMembers = GetTeamMembers(team.Id, connection);
+
+                        output.Add(team);
+                    }
+                }
+            }
+              return output;
         }
+
+        private List<PersonModel> GetTeamMembers(int teamId, SqlConnection connection)
+        {
+            List<PersonModel> output = new List<PersonModel>();
+
+            SqlCommand cmd = new SqlCommand("dbo.spTeamMembers_GetByTeam", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@TeamId", teamId);
+
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    output.Add(new PersonModel
+                    {
+                        Id = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.GetString(2),
+                        EmailAddress = reader.GetString(3),
+                        CellphoneNumber = reader.GetString(4)
+                    });
+                }
+            }
+
+            return output;
+        }
+
+
+        public List<TournamentModel> GetTournament_All()
+        {
+            List<TournamentModel> output;
+
+            using (SqlConnection connection =
+                new SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                output = connection.Query<TournamentModel>(
+                    "dbo.spTournaments_GetAll",
+                    commandType: CommandType.StoredProcedure
+                ).ToList();
+            }
+
+            return output;
+        }
+        public void UpdateMatchup(MatchupModel model)
+        {
+            using (SqlConnection connection =
+                new SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                foreach (MatchupEntryModel entry in model.Entries)
+                {
+                    connection.Execute(
+                        "dbo.spMatchupEntries_Update",
+                        new { entry.Id, entry.Score },
+                        commandType: CommandType.StoredProcedure
+                    );
+                }
+
+                if (model.Winner != null)
+                {
+                    connection.Execute(
+                        "dbo.spMatchups_Update",
+                        new { model.Id, WinnerId = model.Winner.Id },
+                        commandType: CommandType.StoredProcedure
+                    );
+                }
+            }
+        }
+
+
     }
 
 }

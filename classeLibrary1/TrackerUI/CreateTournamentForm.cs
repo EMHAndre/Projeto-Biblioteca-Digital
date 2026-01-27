@@ -42,7 +42,16 @@ namespace TrackerUI
             prizesListBox.DataSource = null;
             prizesListBox.DataSource = selectedPrizes;
             prizesListBox.DisplayMember = "PlaceName";
+
+            selectTeamDropDown.DataSource = GlobalConfig.Connections[0].GetTeam_All();
+            selectTeamDropDown.DisplayMember = "TeamName";
         }
+
+        private void LoadTeamList()
+        {
+            availableTeams = GlobalConfig.Connections[0].GetTeam_All();
+        }
+
 
         private void TournamentValue_TextChanged(object sender, EventArgs e)
         {
@@ -76,17 +85,26 @@ namespace TrackerUI
 
         private void SelectTeamDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void AddTeamButton_Click(object sender, EventArgs e)
         {
+            TeamModel t = (TeamModel)selectTeamDropDown.SelectedItem;
+
+            if (t != null)
+            {
+                availableTeams.Remove(t);
+                selectedTeams.Add(t);
+
+                WireUpLists();
+            }
 
         }
 
         private void CreatePrizeBotton_Click(object sender, EventArgs e)
         {
-
+            CreatePrizeForm frm = new CreatePrizeForm();
+            frm.Show();
         }
 
         private void CreateTournamentBotton_Click(object sender, EventArgs e)

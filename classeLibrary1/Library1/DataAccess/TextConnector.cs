@@ -43,6 +43,21 @@ namespace Library1.DataAccess
         {
             return;
         }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDataConnection.CreateTournament(TournamentModel t)
+        {
+            return;
+        }
+
+        public void UpdateMatchup(MatchupModel m)
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }

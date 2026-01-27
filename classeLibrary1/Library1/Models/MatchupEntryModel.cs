@@ -20,5 +20,6 @@ namespace Library1.Models
         /// Represents the matchup this team came from as the winner.
         /// </summary>
         public MatchupModel ParentMatchup { get; set; }
+        public object Id { get; internal set; }
     }
 }
