@@ -16,6 +16,8 @@ namespace TrackerUI
 {
     public partial class CreatePrizeForm : Form
     {
+        public object Prize { get; internal set; }
+
         public CreatePrizeForm()
         {
             InitializeComponent();

@@ -21,12 +21,7 @@ namespace TrackerUI
         public CreateTournamentForm()
         {
             InitializeComponent();
-        }
-
-        private void CreateTournamentForm_Load(object sender, EventArgs e)
-        {
-            availableTeams = GlobalConfig.Connections[0].GetTeam_All();
-            WireUpLists();
+            this.Load += CreateTournamentForm_Load;
         }
 
         private void WireUpLists()
@@ -42,14 +37,21 @@ namespace TrackerUI
             prizesListBox.DataSource = null;
             prizesListBox.DataSource = selectedPrizes;
             prizesListBox.DisplayMember = "PlaceName";
-
-            selectTeamDropDown.DataSource = GlobalConfig.Connections[0].GetTeam_All();
-            selectTeamDropDown.DisplayMember = "TeamName";
         }
+
+        private void CreateTournamentForm_Load(object sender, EventArgs e)
+        {
+            LoadTeamList();
+            WireUpLists();
+        }
+
+
+
 
         private void LoadTeamList()
         {
             availableTeams = GlobalConfig.Connections[0].GetTeam_All();
+            MessageBox.Show($"Equipas carregadas: {availableTeams.Count}");
         }
 
 
@@ -65,6 +67,14 @@ namespace TrackerUI
 
         private void deleteSelectedPlayersButton_Click(object sender, EventArgs e)
         {
+            TeamModel t = (TeamModel)tournamentTeamsListBox.SelectedItem;
+
+            if (t != null)
+            {
+                selectedTeams.Remove(t);
+                availableTeams.Add(t);
+                WireUpLists();
+            }
 
         }
 
@@ -104,7 +114,13 @@ namespace TrackerUI
         private void CreatePrizeBotton_Click(object sender, EventArgs e)
         {
             CreatePrizeForm frm = new CreatePrizeForm();
-            frm.Show();
+            frm.ShowDialog();
+
+            if (frm.Prize != null)
+            {
+                selectedPrizes.Add((PrizeModel)frm.Prize);
+                WireUpLists();
+            }
         }
 
         private void CreateTournamentBotton_Click(object sender, EventArgs e)

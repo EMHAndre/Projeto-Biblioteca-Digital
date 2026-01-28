@@ -181,15 +181,17 @@ namespace Library1.DataAccess
             return output;
         }
 
-        public List<TeamModel> GetTeam_All()
+        private List<PersonModel> GetTeamMembers(int teamId)
         {
-            List<TeamModel> output = new List<TeamModel>();
+            List<PersonModel> output = new List<PersonModel>();
 
             using (SqlConnection connection =
                 new SqlConnection(GlobalConfig.CnnString("Tournaments")))
             {
-                SqlCommand cmd = new SqlCommand("dbo.spTeams_GetAll", connection);
+                SqlCommand cmd =
+                    new SqlCommand("dbo.spTeamMembers_GetByTeam", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@TeamId", teamId);
 
                 connection.Open();
 
@@ -197,46 +199,26 @@ namespace Library1.DataAccess
                 {
                     while (reader.Read())
                     {
-                        TeamModel team = new TeamModel
+                        output.Add(new PersonModel
                         {
                             Id = reader.GetInt32(0),
-                            TeamName = reader.GetString(1)
-                        };
-
-                        team.TeamMembers = GetTeamMembers(team.Id, connection);
-
-                        output.Add(team);
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            EmailAddress = reader.GetString(3),
+                            CellphoneNumber = reader.GetString(4)
+                        });
                     }
-                }
-            }
-              return output;
-        }
-
-        private List<PersonModel> GetTeamMembers(int teamId, SqlConnection connection)
-        {
-            List<PersonModel> output = new List<PersonModel>();
-
-            SqlCommand cmd = new SqlCommand("dbo.spTeamMembers_GetByTeam", connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@TeamId", teamId);
-
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    output.Add(new PersonModel
-                    {
-                        Id = reader.GetInt32(0),
-                        FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
-                        EmailAddress = reader.GetString(3),
-                        CellphoneNumber = reader.GetString(4)
-                    });
                 }
             }
 
             return output;
         }
+
+
+
+
+
+        
 
 
         public List<TournamentModel> GetTournament_All()
@@ -279,7 +261,39 @@ namespace Library1.DataAccess
             }
         }
 
+        public List<TeamModel> GetTeam_All()
+        {
+            List<TeamModel> output = new List<TeamModel>();
 
+            using (SqlConnection connection =
+                new SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                SqlCommand cmd =
+                    new SqlCommand("dbo.spTeams_GetAll", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        TeamModel team = new TeamModel
+                        {
+                            Id = reader.GetInt32(0),
+                            TeamName = reader.GetString(1)
+                        };
+
+                        // 👇 cada equipa carrega os seus membros
+                        team.TeamMembers = GetTeamMembers(team.Id);
+
+                        output.Add(team);
+                    }
+                }
+            }
+
+            return output;
+        }
     }
 
 }
