@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library1.Models
 {
-    public class PrizeModel
+    public class PrizeModel : DataAccess.IModeloComId
     {
         /// <summary>
         ///  The unique identifier for the prize
@@ -19,6 +19,7 @@ namespace Library1.Models
         public double PrizePercentage { get; set; }
         public PrizeModel()
         {
+           
 
         }
 

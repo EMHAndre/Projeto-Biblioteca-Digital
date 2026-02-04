@@ -123,20 +123,23 @@ namespace TrackerUI
             }
         }
 
+        
         private void CreateTournamentBotton_Click(object sender, EventArgs e)
         {
-              TournamentModel t = new TournamentModel
-              {
-                  TournamentName = tournamentNameValue.Text,
-                  EntryFee = decimal.Parse(entryFeeValue.Text),
-                  EnteredTeams = selectedTeams,
-                  Prizes = selectedPrizes
-              };
+            TournamentModel t = new TournamentModel
+            {
+                TournamentName = tournamentNameValue.Text,
+                EntryFee = decimal.Parse(entryFeeValue.Text),
+                EnteredTeams = selectedTeams,
+                Prizes = selectedPrizes
+            };
 
-              foreach (IDataConnection db in GlobalConfig.Connections)
-              {
-                  db.CreateTournament(t);
-              }
+            TournamentLogic.CreateRounds(t);
+
+            foreach (IDataConnection db in GlobalConfig.Connections)
+            {
+                db.CreateTournament(t);
+            }
 
             MessageBox.Show("Tournament created successfully!");
         }

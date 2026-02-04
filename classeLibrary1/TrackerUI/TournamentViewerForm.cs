@@ -10,12 +10,12 @@ namespace TrackerUI
         TournamentModel tournament;
         List<int> rounds = new List<int>();
         List<MatchupModel> selectedMatchups = new List<MatchupModel>();
-        private TournamentModel? model;
+        
 
-        public TournamentViewerForm()
+        public TournamentViewerForm(TournamentModel t)
         {
             InitializeComponent();
-            tournament = model;
+            tournament = t;
             LoadFormData();
         }
 
@@ -28,14 +28,16 @@ namespace TrackerUI
          {
              TournamentName.Text = tournament.TournamentName;
 
-             rounds = tournament.Rounds
-                 .Select(x => x.MatchupRound)
-                 .Distinct()
-                 .OrderBy(x => x)
-                 .ToList();
+            rounds = tournament.Rounds
+            .Select(r => r.First().MatchupRound)
+            .Distinct()
+            .OrderBy(x => x)
+            .ToList();
 
-             roundDropDown.DataSource = rounds;
+            roundDropDown.DataSource = rounds;
          }
+
+
          private void roundDropDown_SelectedIndexChanged(object sender, EventArgs e)
          {
              LoadMatchups();
@@ -44,16 +46,32 @@ namespace TrackerUI
          {
              int round = (int)roundDropDown.SelectedItem;
 
-             selectedMatchups = tournament.Rounds
-                 .Where(x => x.MatchupRound == round)
-                 .ToList();
+            selectedMatchups = tournament.Rounds
+          .Where(r => r.First().MatchupRound == round)
+          .SelectMany(r => r)
+          .ToList();
 
-             matchupListBox.DataSource = null;
+            matchupListBox.DataSource = null;
              matchupListBox.DataSource = selectedMatchups;
              matchupListBox.DisplayMember = "DisplayName";
          }
 
-         private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadRounds()
+        {
+            rounds = new List<int>();
+
+            for (int i = 0; i < tournament.Rounds.Count; i++)
+            {
+                rounds.Add(i + 1);
+            }
+
+            roundDropDown.DataSource = rounds;
+        }
+
+
+
+
+        private void matchupListBox_SelectedIndexChanged(object sender, EventArgs e)
          {
              MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
 
@@ -87,6 +105,35 @@ namespace TrackerUI
 
              LoadMatchups();
          }
+
+        private void DisplayMatchupInfo(MatchupModel m)
+        {
+            if (m == null) return;
+
+            teamOneName.Text = m.Entries[0].TeamCompeting?.TeamName ?? "TBD";
+            teamTwoName.Text = m.Entries.Count > 1
+                ? m.Entries[1].TeamCompeting?.TeamName ?? "TBD"
+                : "BYE";
+
+            teamOneScoreValue.Text = m.Entries[0].Score.ToString();
+            teamTwoScoreValue.Text = m.Entries.Count > 1
+                ? m.Entries[1].Score.ToString()
+                : "";
+        }
+
+        private void DetermineWinner(MatchupModel m)
+        {
+            if (m.Entries[0].Score > m.Entries[1].Score)
+            {
+                m.Winner = m.Entries[0].TeamCompeting;
+            }
+            else
+            {
+                m.Winner = m.Entries[1].TeamCompeting;
+            }
+        }
+
+
 
 
     }

@@ -12,8 +12,12 @@ namespace Library1
 {
     public static class GlobalConfig
     {
+        public const string PrizesFile = "PrizeModels.csv";
+        public const string PeopleFile = "PersonModels.csv";
+        public const string TeamsFile = "TeamModels.csv";
+        public const string TournamentsFile = "TournamentModels.csv";
         public static List<IDataConnection> Connections { get; private set; } = new List<IDataConnection>();
-
+        
         public static void InitializeConnections(bool database, bool textFiles)
         {
             if (database)

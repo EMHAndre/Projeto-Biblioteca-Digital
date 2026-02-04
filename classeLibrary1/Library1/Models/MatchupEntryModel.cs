@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library1.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library1.Models
 {
-    public class MatchupEntryModel
+    public class MatchupEntryModel : DataAccess.IModeloComId
     {
         /// <summary>
         /// Refers to the team competing in this matchup
@@ -21,5 +22,6 @@ namespace Library1.Models
         /// </summary>
         public MatchupModel ParentMatchup { get; set; }
         public object Id { get; internal set; }
+        int IModeloComId.Id { get => throw new NotImplementedException(); set => Id = value; }
     }
 }

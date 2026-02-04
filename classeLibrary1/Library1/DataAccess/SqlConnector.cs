@@ -215,12 +215,6 @@ namespace Library1.DataAccess
         }
 
 
-
-
-
-        
-
-
         public List<TournamentModel> GetTournament_All()
         {
             List<TournamentModel> output;
@@ -293,6 +287,16 @@ namespace Library1.DataAccess
             }
 
             return output;
+        }
+
+        TeamModel IDataConnection.CreateTeam(TeamModel modelo)
+        {
+            throw new NotImplementedException();
+        }
+
+        TournamentModel IDataConnection.CreateTournament(TournamentModel modelo)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -186,6 +186,9 @@
     <Compile Include="Models\TeamModel.cs" />
     <Compile Include="DataAccess\TextConnector.cs" />
     <Compile Include="Models\TournamentModel.cs" />
+    <Compile Include="DataAccess\TextConnectorExtensions.cs" />
+    <Compile Include="DataAccess\TextConnectorProcessor.cs" />
+    <Compile Include="TournamentLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

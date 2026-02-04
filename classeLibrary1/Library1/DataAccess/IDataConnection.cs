@@ -9,13 +9,18 @@ namespace Library1.DataAccess
 {
     public interface IDataConnection
     {
-        PrizeModel CreatePrize(PrizeModel model);
+
+        PrizeModel CreatePrize(PrizeModel modelo);
+        PersonModel CreatePerson(PersonModel modelo);
+        TeamModel CreateTeam(TeamModel modelo);
+        TournamentModel CreateTournament(TournamentModel modelo);
+
         List<PersonModel> GetPerson_All();
-        PersonModel CreatePerson(PersonModel model);
-        void CreateTeam(TeamModel t);
         List<TeamModel> GetTeam_All();
-        void CreateTournament(TournamentModel t);
-        void UpdateMatchup(MatchupModel m);
+        List<TournamentModel> GetTournament_All();
+
+        void UpdateMatchup(MatchupModel matchup);
+
     }
 
 }
